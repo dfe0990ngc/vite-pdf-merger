@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="{{ asset('images/img-logo.webp') }}" type="image/png">
 
-    @vite('./resources/css/app.css')
+    @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <body class="font-sans antialiased min-h-screen relative">
     <table class="w-full h-full absolute m-0 p-0 gap-0 border-0 bg-page bg-contain dark:bg-black dark:text-white/50">
@@ -39,6 +39,5 @@
             </tr>
         </tfoot>
     </table>
-    @vite('./resources/js/app.js')
 </body>
 </html>
