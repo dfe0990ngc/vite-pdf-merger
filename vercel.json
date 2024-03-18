@@ -7,11 +7,11 @@
     "outputDirectory": "public",
     "routes": [
         {
-            "src": "/public/build/assets/(.)",
+            "src": "/build/assets/(.*)",
             "dest": "/public/build/assets/"
         },
         {
-            "src": "/public/images(.*)",
+            "src": "/images(.*)",
             "dest": "/public/images/"
         },
         {
