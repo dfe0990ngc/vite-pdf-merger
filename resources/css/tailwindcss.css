@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dropzone{
+    border: none !important;
+    transition: transform 0.3s ease;
+}
+
+.dz-button{
+    color: #6a0b0b !important;
+    font-weight: bold !important;
+}
+
+.dropzone .dz-preview {
+    transition: transform 0.3s ease;
+}
+.dropzone .dz-preview:hover {
+    transform: scale(1.05); /* Scale up on hover */
+    cursor: pointer !important;
+}
+
+.dz-details{
+    opacity: 1 !important;
+}
+
+.dz-image-preview{
+    border-radius: 20%;
+    background: transparent !important;
+}
+
+#pdfUploader.dz-default.dz-message{
+    position: absolute !important;
+    top: -40px !important;
+}
