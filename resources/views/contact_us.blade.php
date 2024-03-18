@@ -4,7 +4,7 @@
 @section('description', 'Free PDF Merger or Join multiple PDF files into single a file.')
 
 @section('content')
-    @vite('./resources/css/dropzone.css')
+    @vite(['resources/css/dropzone.css','resources/js/contact_us.js'])
     <div class="flex flex-col justify-start w-full items-center my-5">
         <h1 class="text-5xl text-[#9F0000] font-bold mt-3 mb-5 text-left w-full">
             Contact Us
@@ -77,5 +77,4 @@
             <a class="font-bold" href="mailto:pdfmergerauthor@gmail.com">pdfmergerauthor@gmail.com</a>
         </p>
     </div>
-    @vite('./resources/js/contact_us.js')
 @endsection

@@ -5,7 +5,7 @@
 
 @section('content')
 
-    @vite('./resources/css/dropzone.css')
+    @vite(['resources/css/dropzone.css','resources/js/home.js'])
 
     <div class="flex flex-col-reverse justify-center w-full items-center sm:flex-row sm:justify-between sm:items-center my-5">
         <div class="flex flex-col gap-3 w-full sm:w-auto pr-2">
@@ -49,6 +49,4 @@
             </p>
         </div>
     </div>
-
-    @vite('./resources/js/home.js')
 @endsection
