@@ -7,14 +7,6 @@
     "outputDirectory": "public",
     "routes": [
         {
-            "src": "/build/(.*)",
-            "dest": "/build/assets/$1"
-        },
-        {
-            "src": "/images/(.*)",
-            "dest": "/images/$1"
-        },
-        {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
