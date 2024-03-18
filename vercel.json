@@ -8,11 +8,11 @@
     "routes": [
         {
             "src": "/build/(.*)",
-            "dest": "/build/assets/"
+            "dest": "/public/build/"
         },
         {
             "src": "/images(.*)",
-            "dest": "/images/"
+            "dest": "/public/images/"
         },
         {
             "src": "/(.*)",
