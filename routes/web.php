@@ -27,8 +27,8 @@ Route::get('/contact-us-remove-file',[ContactUsController::class,'removeFile'])-
 Route::post('/contact-us-add',[ContactUsController::class,'store'])->name('contact_us.add');
 
 Route::get('/optimize-me', function(){
-    Artisan::call('set:permissions /var/task/user/public/uploads');
-    Artisan::call('set:permissions /var/task/user/public/db');
+    Artisan::call('app:set-permissions /var/task/user/public/uploads');
+    Artisan::call('app:set-permissions /var/task/user/public/db');
     Artisan::call('migrate:fresh');
     Artisan::call('config:clear');
     Artisan::call('config:cache');
