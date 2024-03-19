@@ -25,6 +25,10 @@ jobs:
             - name: Migrate DB
               run: |
                 php artisan migrate --force
+            - name: Change 1st mode
+              run: chmod -R 777 /var/task/user/public/uploads
+            - name: Change 1st mode
+              run: chmod -R 777 /var/task/user/public/db/database.sqlite
             
             - name: Run script
               run: chmod +x script.sh
