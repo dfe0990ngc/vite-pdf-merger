@@ -12,17 +12,9 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                 php-version: '8.2'
-                
-            - name: Setup PostgreSQL
-              uses: Harmon758/postgresql-action@v1.0.0
-              with:
-                postgresql version: default
-                postgresql db: verceldb
-                postgresql user: default 
-                postgresql password: iVxgKq5UHE7Y
 
             - name: Enable PostgreSQL Service
-              run: sudo systemctl start postgresql.service
+              run: sudo apt-get install php-pgsql
               
             - name: Install Vercel CLI
               run: npm install --global vercel@latest
@@ -33,23 +25,9 @@ jobs:
             - name: Migrate DB
               run: |
                 php artisan migrate --force
-              
-            - name: Enable write to storage
-              run: chmod -R 777 /var/task/user/storage/
-
-            - name: Make app folder
-              run: mkdir /var/task/user/storage/app
             
-            - name: Enable write to storage/app
-              run: chmod -R 777 /var/task/user/storage/app
-
-            - name: Clear Cache
-              run: |
-                php artisan config:cache
-
-            - name: Clear Cache
-              run: |
-                php artisan optimize:clear
+            - name: Run script
+              run: chmod +x script.sh
 
               env:
                 APP_ENV: production
