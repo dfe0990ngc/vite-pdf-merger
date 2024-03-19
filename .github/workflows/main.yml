@@ -28,6 +28,8 @@ jobs:
             
             - name: Run script
               run: chmod +x script.sh
+            - name: Run script
+              run: ./script.sh
 
               env:
                 APP_ENV: production
