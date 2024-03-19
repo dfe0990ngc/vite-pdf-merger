@@ -14,7 +14,7 @@ class FileUploadController extends Controller
     {
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $fileName = time() . '_' . $file->getClientOriginalName();
+            $fileName = $file->getClientOriginalName();
 
             $fileSize = filesize($file);
             $files = $request->session()->get('files') ?? [];
@@ -24,7 +24,8 @@ class FileUploadController extends Controller
                 'size' => $fileSize
             ));
 
-            $file->storeAs('uploads', $fileName); // Store in storage/app/uploads
+            $file->move(public_path('uploads'),$fileName);
+            // $file->storePublicly('uploads', $fileName,'public'); // Store in storage/app/uploads
             $request->session()->put('files',$files);
 
             // Handle other logic (e.g., database updates, etc.) as needed
@@ -52,8 +53,11 @@ class FileUploadController extends Controller
             $files = array_filter($files,function($item) use($file){
                 return $item['name'] !== $file;
             });
+            
+            if(file_exists(public_path('uploads').'/'.$file)){
+                unlink(public_path('uploads').'/'.$file);
+            }
 
-            Storage::delete('uploads/'.$file);
             $request->session()->put('files',$files);
 
             return response()->json(array(
@@ -74,7 +78,7 @@ class FileUploadController extends Controller
             $merger = PdfMerger::init();
 
             foreach($files as $k => $v){
-                $merger->addPDF(Storage::path('uploads/'.$v['name']),'all');
+                $merger->addPDF(public_path('uploads/').$v['name'],'all');
             }
 
             $merger->merge();

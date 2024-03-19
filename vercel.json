@@ -34,12 +34,7 @@
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie",
         
-        "DB_CONNECTION": "pgsql",
-        "DB_URL": "postgres://default:iVxgKq5UHE7Y@ep-wild-snow-a4v0zz3v-pooler.us-east-1.aws.neon.tech/verceldb?sslmode=require",
-        "DB_HOST": "ep-wild-snow-a4v0zz3v-pooler.us-east-1.aws.neon.tech",
-        "DB_PORT": "5432",
-        "DB_DATABASE": "verceldb",
-        "DB_USERNAME": "default",
-        "DB_PASSWORD": "iVxgKq5UHE7Y"
+        "DB_CONNECTION": "sqlite",
+        "DB_DATABASE": "/var/task/user/database/database.sqlite"
     }
 }
