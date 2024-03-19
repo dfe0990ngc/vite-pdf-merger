@@ -12,7 +12,7 @@ class SetPermissions extends Command
      *
      * @var string
      */
-    protected $signature = 'app:set-permissions';
+    protected $signature = 'app:set-permissions {directory : The directory to set permissions for}';
 
     /**
      * The console command description.
