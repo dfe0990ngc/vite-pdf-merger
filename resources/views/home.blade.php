@@ -20,7 +20,7 @@
             </p>
         </div>
         <figure class="flex flex-col items-center justify-center w-full sm:w-auto">
-            <img class="rounded-2xl w-full" width="449px" height="350px" src="{{ asset('images/img-banner.webp') }}" alt="">
+            <img class="rounded-2xl w-full" width="449px" height="350px" src="{{ asset('images/img-banner.webp') }}" alt="Home page Banner Image">
         </figure>
     </div>
     <hr class="border-red-950 w-full my-5">
