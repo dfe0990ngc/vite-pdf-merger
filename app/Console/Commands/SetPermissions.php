@@ -19,7 +19,7 @@ class SetPermissions extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Set Permission of directory into 0755 recursively';
 
     /**
      * Execute the console command.
