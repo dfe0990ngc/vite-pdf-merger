@@ -6,17 +6,21 @@ jobs:
         name: Deploy
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
                 php-version: '8.2'
-              
+                
             - name: Setup PostgreSQL
-              uses: tj-actions/install-postgresql@v3
+              uses: Harmon758/postgresql-action@v1.0.0
               with:
-                postgresql-version: 16
+                postgresql version: default
+                postgresql db: verceldb
+                postgresql user: default 
+                postgresql password: iVxgKq5UHE7Y
+                      
 
             - name: Install Vercel CLI
               run: npm install --global vercel@latest
