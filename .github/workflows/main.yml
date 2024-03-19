@@ -34,6 +34,9 @@ jobs:
               run: |
                 php artisan migrate --force
               
+            - name: Enable write to storage
+              run: chmod -R 775 /var/task/user/storage/
+
             - name: Clear Cache
               run: |
                 php artisan config:cache
