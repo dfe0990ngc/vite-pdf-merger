@@ -29,11 +29,23 @@ const myDropzone = new Dropzone("#pdfUploader", {
     },
     removedfile: function(file){
         file.previewElement.remove();
-
-        fetch('/remove-file?file='+file.name).then(response => response.json())
-        .then(data => {
-            console.log('File has been removed successfully!');
-        });
+        let fl = file?.upload?.filename;
+        if(fl === undefined)
+            fl = file.name;
+        
+        fetch('/remove-file?file='+fl).then(response => response.json()).then(data => {});
+    },
+    renameFile: function (file) {
+        return file.lastModified+'_'+file.name;
+    },
+    success: function(file, response){
+        const spans = document.querySelectorAll('[data-dz-name]');
+        for(let x=0;x<spans.length;x++){
+            if(spans[x].textContent === file.name){
+                spans[x].textContent = file?.upload?.filename;
+                break;
+            }
+        }
     }
 });
 

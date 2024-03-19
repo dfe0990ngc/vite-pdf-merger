@@ -57,7 +57,7 @@ class ContactUsController extends Controller
     {
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $fileName = time() . '_' . $file->getClientOriginalName();
+            $fileName = $file->getClientOriginalName();
 
             $fileSize = filesize($file);
             $files = session('attachments') ?? [];
@@ -67,7 +67,8 @@ class ContactUsController extends Controller
                 'size' => $fileSize
             ));
 
-            $file->storeAs('uploads', $fileName); // Store in storage/app/uploads
+            $file->move(public_path('uploads'),$fileName);
+            // $file->storePublicly('uploads', $fileName,'public'); // Store in storage/app/uploads
             session()->put('attachments',$files);
 
             // Handle other logic (e.g., database updates, etc.) as needed
@@ -96,7 +97,10 @@ class ContactUsController extends Controller
                 return $item['name'] !== $file;
             });
 
-            Storage::delete('uploads/'.$file);
+            if(file_exists(public_path('uploads').'/'.$file)){
+                unlink(public_path('uploads').'/'.$file);
+            }
+
             session()->put('attachments',$files);
 
             return response()->json(array(
