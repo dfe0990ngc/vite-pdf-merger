@@ -35,6 +35,6 @@
         "SESSION_DRIVER": "cookie",
         
         "DB_CONNECTION": "sqlite",
-        "DB_DATABASE": "/var/task/user/database/database.sqlite"
+        "DB_DATABASE": "/var/task/user/public/db/database.sqlite"
     }
 }
