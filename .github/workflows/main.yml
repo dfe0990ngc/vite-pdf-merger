@@ -12,6 +12,11 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                 php-version: '8.2'
+              
+            - name: Install Postgresql
+              run: |
+                apt-get update
+                apt-get install --yes --no-install-recommends postgresql-client
 
             - name: Install Vercel CLI
               run: npm install --global vercel@latest
