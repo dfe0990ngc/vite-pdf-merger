@@ -20,8 +20,10 @@ jobs:
                 postgresql db: verceldb
                 postgresql user: default 
                 postgresql password: iVxgKq5UHE7Y
-                      
 
+            - name: Enable PostgreSQL Service
+              run: sudo systemctl start postgresql.service
+              
             - name: Install Vercel CLI
               run: npm install --global vercel@latest
 
@@ -31,6 +33,15 @@ jobs:
             - name: Migrate DB
               run: |
                 php artisan migrate --force
+              
+            - name: Clear Cache
+              run: |
+                php artisan config:cache
+
+            - name: Clear Cache
+              run: |
+                php artisan optimize:clear
+
               env:
                 APP_ENV: production
                 # DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
