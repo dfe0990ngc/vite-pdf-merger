@@ -33,18 +33,18 @@ jobs:
 
               env:
                 APP_ENV: production
-                # DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
+                DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
                 # DB_HOST: ${{ secrets.DB_HOST }}
                 # DB_PORT: 3306
-                # DB_DATABASE: ${{ secrets.DB_DATABASE }}
+                DB_DATABASE: ${{ secrets.DB_DATABASE }}
                 # DB_USERNAME: ${{ secrets.DB_USERNAME }}
                 # DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
                 # MYSQL_ATTR_SSL_CA: /etc/ssl/certs/ca-certificates.crt
 
-                DB_CONNECTION: ${{ secrests.DB_CONNECTION }}
-                DB_URL: ${{ secrests.DB_URL }}
-                DB_HOST: ${{ secrests.DB_HOST }}
-                DB_PORT: ${{ secrests.DB_PORT }}
-                DB_DATABASE: ${{ secrests.DB_DATABASE }}
-                DB_USERNAME: ${{ secrests.DB_USERNAME }}
-                DB_PASSWORD: ${{ secrests.DB_PASSWORD }}
+                # DB_CONNECTION: ${{ secrests.DB_CONNECTION }}
+                # DB_URL: ${{ secrests.DB_URL }}
+                # DB_HOST: ${{ secrests.DB_HOST }}
+                # DB_PORT: ${{ secrests.DB_PORT }}
+                # DB_DATABASE: ${{ secrests.DB_DATABASE }}
+                # DB_USERNAME: ${{ secrests.DB_USERNAME }}
+                # DB_PASSWORD: ${{ secrests.DB_PASSWORD }}
