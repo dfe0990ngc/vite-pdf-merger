@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class SetPermissions extends Command
 {
@@ -34,5 +35,6 @@ class SetPermissions extends Command
             $this->info("Permissions set successfully for directory: $directory");
         } else {
             $this->error("Directory '$directory' does not exist.");
+        }
     }
 }
