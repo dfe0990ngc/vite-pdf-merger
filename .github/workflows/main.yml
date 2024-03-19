@@ -35,7 +35,13 @@ jobs:
                 php artisan migrate --force
               
             - name: Enable write to storage
-              run: chmod -R 775 /var/task/user/storage/
+              run: chmod -R 777 /var/task/user/storage/
+
+            - name: Make app folder
+              run: mkdir /var/task/user/storage/app
+            
+            - name: Enable write to storage/app
+              run: chmod -R 777 /var/task/user/storage/app
 
             - name: Clear Cache
               run: |
