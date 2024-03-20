@@ -10,6 +10,9 @@
     <link rel="shortcut icon" href="{{ asset('images/img-logo.webp') }}" type="image/png">
 
     @vite(['resources/css/app.css','resources/js/app.js'])
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6648935279137944"
+    crossorigin="anonymous"></script>
 </head>
 <body class="font-sans antialiased min-h-screen relative">
     <table class="w-full h-full absolute m-0 p-0 gap-0 border-0 bg-page bg-contain dark:bg-black dark:text-white/50">
