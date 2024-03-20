@@ -8,15 +8,18 @@ use App\Models\PDFMergeSubscriber;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
-class PDFMergeSubscriberController extends Controller
+class PDFMergeSubscriberController extends FirebaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $subscribers = PDFMergeSubscriber::all();
-
+        $subscribers = $this->get_subscribers();
         return response()->json($subscribers,200);
     }
 
@@ -34,13 +37,12 @@ class PDFMergeSubscriberController extends Controller
 
         if(!$validator->fails()){
             $email = $request->input('email');
-            $subscriber = PDFMergeSubscriber::where('email',$email)->
-            orWhere('active',false)->get();
+            $subscriber = $this->is_subscriber_exists($email);
 
-            if($subscriber->count() > 1){
-                PDFMergeSubscriber::where(['email' => $email])->update(['active' => true]);
+            if($subscriber){
+                $this->resubscribe_email($email);
             }else{
-                PDFMergeSubscriber::create(['email' => $email,'active' => true]);
+                $this->add_subscriber_email($email);
             }
 
             $thankyouMail = new ThankYouMail();
@@ -58,8 +60,7 @@ class PDFMergeSubscriberController extends Controller
 
     public function update(Request $request){
         $email = $request->input('email');
-        PDFMergeSubscriber::where('email',$email)->update(['active' => false]);
-
+        $this->unsubscribe_email($email);
         return view('unsubscribed');
     }
 }

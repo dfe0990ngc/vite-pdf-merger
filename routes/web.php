@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactUsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\FirebaseController;
 use App\Http\Controllers\PDFMergeSubscriberController;
 use Illuminate\Support\Facades\Artisan;
 
@@ -27,8 +28,6 @@ Route::get('/contact-us-remove-file',[ContactUsController::class,'removeFile'])-
 Route::post('/contact-us-add',[ContactUsController::class,'store'])->name('contact_us.add');
 
 Route::get('/optimize-me', function(){
-    Artisan::call('app:set-permissions /var/task/user/public/uploads');
-    Artisan::call('app:set-permissions /var/task/user/public/db');
     Artisan::call('migrate:fresh');
     Artisan::call('config:clear');
     Artisan::call('config:cache');

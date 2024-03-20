@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use LynX39\LaraPdfMerger\Facades\PdfMerger;
 
 
-class FileUploadController extends Controller
+class FileUploadController extends FirebaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    
     public function upload(Request $request)
     {
         if ($request->hasFile('file')) {
@@ -18,14 +22,12 @@ class FileUploadController extends Controller
 
             $fileSize = filesize($file);
             $files = $request->session()->get('files') ?? [];
-
             array_push($files,array(
                 'name' => $fileName,
                 'size' => $fileSize
             ));
-
-            $file->move(public_path('uploads'),$fileName);
-            // $file->storePublicly('uploads', $fileName,'public'); // Store in storage/app/uploads
+            
+            $this->upload_to_firebase_storage($file);
             $request->session()->put('files',$files);
 
             // Handle other logic (e.g., database updates, etc.) as needed
@@ -47,18 +49,13 @@ class FileUploadController extends Controller
     public function removeFile(Request $request){
         try{
             $file = $request->input('file');
-
-            $files = $request->session()->get('files');
-
+            $files = session()->get('files');
             $files = array_filter($files,function($item) use($file){
                 return $item['name'] !== $file;
             });
             
-            if(file_exists(public_path('uploads').'/'.$file)){
-                unlink(public_path('uploads').'/'.$file);
-            }
-
-            $request->session()->put('files',$files);
+            $this->delete_file_from_firebase_storage($file);
+            session()->put('files',$files);
 
             return response()->json(array(
                 'message' => 'Successfully deleted!'
@@ -78,7 +75,8 @@ class FileUploadController extends Controller
             $merger = PdfMerger::init();
 
             foreach($files as $k => $v){
-                $merger->addPDF(public_path('uploads/').$v['name'],'all');
+                $file_name = $this->get_file_from_firebase_storage($v['name']);
+                $merger->addPDF($file_name,'all');
             }
 
             $merger->merge();
