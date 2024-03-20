@@ -28,7 +28,6 @@ Route::get('/contact-us-remove-file',[ContactUsController::class,'removeFile'])-
 Route::post('/contact-us-add',[ContactUsController::class,'store'])->name('contact_us.add');
 
 Route::get('/optimize-me', function(){
-    Artisan::call('migrate:fresh');
     Artisan::call('config:clear');
     Artisan::call('config:cache');
     Artisan::call('optimize:clear');
