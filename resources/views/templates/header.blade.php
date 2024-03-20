@@ -16,7 +16,7 @@
     </nav>
 </header>
 
-<div id="nav-main-overlay" class="hidden sm:hidden absolute bg-black opacity-70 top-0 min-w-full min-h-full z-40 transition-all duration-300"></div>
+<div id="nav-main-overlay" class="hidden sm:hidden absolute bg-black opacity-70 top-0 min-w-full min-h-full z-40 transition-all duration-300 overflow-hidden"></div>
 <ul id="nav-main-menu" class="hidden z-50 sm:hidden list-none bg-page px-5 py-8 shadow-2xl absolute top-16 right-0 w-60 transition-all duration-500">
     <li class="mb-5">
         <a class="hover:opacity-45 font-semibold text-black" href="{{ url('/') }}">Home</a>
