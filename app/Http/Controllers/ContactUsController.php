@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\ContactUs;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 
-class ContactUsController extends Controller
+class ContactUsController extends FirebaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function store(Request $request){
         $validator = Validator::make($request->all(),[
             'name' => 'required',
@@ -33,7 +37,7 @@ class ContactUsController extends Controller
                     $attachments = '';
             }
 
-            ContactUs::create([
+            $this->add_feedback([
                 'name' => $request->get('name'),
                 'email' => $request->get('email'),
                 'subject' => $request->get('subject'),
@@ -45,9 +49,6 @@ class ContactUsController extends Controller
 
             session()->flash('message','Thanks for sending us a message/feedback! We will review this as soon as possible and we will respond accordingly.');
             return redirect('/contact-us',302);
-            // return response()->json(array(
-            //     'message' => 'Thanks for sending us a message/feedback! We will review this as soon as possible and we will respond accordingly.'
-            // ),200);
         }
 
         return response()->json(['errors' => $validator->errors()], 422);
@@ -60,16 +61,14 @@ class ContactUsController extends Controller
             $fileName = $file->getClientOriginalName();
 
             $fileSize = filesize($file);
-            $files = session('attachments') ?? [];
-
+            $files = $request->session()->get('attachments') ?? [];
             array_push($files,array(
                 'name' => $fileName,
                 'size' => $fileSize
             ));
-
-            $file->move(public_path('uploads'),$fileName);
-            // $file->storePublicly('uploads', $fileName,'public'); // Store in storage/app/uploads
-            session()->put('attachments',$files);
+            
+            $this->upload_to_firebase_storage($file);
+            $request->session()->put('attachments',$files);
 
             // Handle other logic (e.g., database updates, etc.) as needed
             return redirect()->back()->with('success', 'File uploaded successfully.');
@@ -90,17 +89,12 @@ class ContactUsController extends Controller
     public function removeFile(Request $request){
         try{
             $file = $request->input('file');
-
             $files = session('attachments') ?? [];
-
             $files = array_filter($files,function($item) use($file){
                 return $item['name'] !== $file;
             });
 
-            if(file_exists(public_path('uploads').'/'.$file)){
-                unlink(public_path('uploads').'/'.$file);
-            }
-
+            $this->delete_file_from_firebase_storage($file);
             session()->put('attachments',$files);
 
             return response()->json(array(

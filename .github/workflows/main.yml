@@ -20,22 +20,14 @@ jobs:
               run: npm install --global vercel@latest
 
             - name: Install Dependencies
-              run: composer install
+              run: composer install --ignore-plaform-req=ext-sodium
 
-            - name: Migrate DB
-              run: |
-                php artisan migrate --force
-            - name: Change 1st mode
-              run: chmod -R 777 /var/task/user/public/uploads
-            - name: Change 1st mode
-              run: chmod -R 777 /var/task/user/public/db/database.sqlite
-            
-            - name: Run script
-              run: chmod +x script.sh
-            - name: Run script
-              run: ./script.sh
+            # - name: Migrate DB
+            #   run: |
+            #     php artisan migrate --force
 
               env:
                 APP_ENV: production
-                DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
-                DB_DATABASE: ${{ secrets.DB_DATABASE }}
+                FIREBASE_PROJECT=${{ secrets.FIREBASE_PROJECT }}
+                FIREBASE_CREDENTIALS=${{ secrets.FIREBASE_CREDENTIALS }}
+                FIREBASE_DATABASE_URL=${{ secrets.FIREBASE_DATABASE_URL }}

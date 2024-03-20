@@ -32,9 +32,6 @@
 
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "cookie",
-        
-        "DB_CONNECTION": "sqlite",
-        "DB_DATABASE": "/var/task/user/public/db/database.sqlite"
+        "SESSION_DRIVER": "cookie"
     }
 }
