@@ -8,7 +8,7 @@
     "routes": [
         {
             "src": "googled13d2a9d2b6d8f12.html",
-            "dest": "/public/"
+            "dest": "/public/googled13d2a9d2b6d8f12.html"
         },
         {
             "src": "/build/(.*)",
