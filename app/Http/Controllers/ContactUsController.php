@@ -67,7 +67,7 @@ class ContactUsController extends FirebaseController
                 'size' => $fileSize
             ));
             
-            $this->upload_to_firebase_storage($file);
+            $this->upload_to_firebase_storage($file,'attachments/');
             $request->session()->put('attachments',$files);
 
             // Handle other logic (e.g., database updates, etc.) as needed
@@ -94,7 +94,7 @@ class ContactUsController extends FirebaseController
                 return $item['name'] !== $file;
             });
 
-            $this->delete_file_from_firebase_storage($file);
+            $this->delete_file_from_firebase_storage($file,'attachments/');
             session()->put('attachments',$files);
 
             return response()->json(array(

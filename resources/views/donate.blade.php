@@ -19,7 +19,7 @@
 
         <h2 class="text-4xl text-[#9F0000] mt-6 mb-4 w-full text-left font-bold">Donation Options:</h2>
         <div class="flex flex-col justify-start items-center gap-8 sm:flex-row w-full sm:justify-center sm:items-center">
-            <div class="relative flex flex-col justify-center items-start bg-white/95 w-80 h-auto p-5 sm:h-96 text-black mt-24 rounded-lg shadow-2xl transition-all hover:scale-105">
+            <div class="relative flex flex-col justify-start items-center bg-white/95 w-80 h-auto p-5 sm:h-96 text-black mt-24 rounded-lg shadow-2xl transition-all hover:scale-105">
                 <figure class="w-[120px] -mt-4 absolute -top-12 left-[50%] -translate-x-1/2">
                     <img class="rounded-full shadow-md" src="{{ asset('images/img-gcash-logo.webp') }}" width="186px" height="186px" alt="GCash Logo">
                 </figure>
@@ -39,6 +39,8 @@
                     <p class="w-full font-bold mb-6 text-lg">BANK OF THE PHILIPPINE ISLANDS</p>
                     <p class="text-red-950 font-semibold">Account Name:</p>
                     <p class="w-full font-bold mb-6 text-lg">NELSON G. CANETE</p>
+                    <p class="text-red-950 font-semibold">Account Number:</p>
+                    <p class="w-full font-bold mb-6 text-lg">8096291967</p>
                     <p class="text-red-950 font-semibold">Branch:</p>
                     <p class="w-full font-bold mb-6 text-lg">BPI AYALA ABREEZA DAVAO</p>
                 </div>

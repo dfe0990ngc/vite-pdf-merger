@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 
 class FirebaseController extends Controller
@@ -82,13 +83,16 @@ class FirebaseController extends Controller
         ]);
     }
 
-    public function upload_to_firebase_storage($file = null){
+    public function upload_to_firebase_storage($file = null,$folder_name = ''){
         if($file === null) return;
+
+        if($folder_name !== '' && strpos($folder_name,'/') === FALSE)
+            $folder_name .= '/';
         
         $file_name = $file->getClientOriginalName();
         $file->move('/tmp',$file_name);
 
-        $this->storage->getBucket()->upload(fopen('/tmp/'.$file_name,'r'));
+        $this->storage->getBucket()->upload(fopen('/tmp/'.$file_name,'r'),['name' => $folder_name.$file_name]);
 
         if(file_exists('/tmp/'.$file_name)){
             unlink('/tmp/'.$file_name);
@@ -97,21 +101,32 @@ class FirebaseController extends Controller
     public function get_files_from_firebase_storage(){
         return $this->storage->getBucket();
     }
-    public function get_file_from_firebase_storage($file_name = ''){
+    public function get_file_from_firebase_storage($file_name = '', $folder_name = ''){
         if($file_name == '') return;
 
-        $file = $this->storage->getBucket()->object($file_name);
+        if($folder_name !== '' && strpos($folder_name,'/') === FALSE)
+            $folder_name .= '/';
+
+        $file = $this->storage->getBucket()->object($folder_name.$file_name);
         $file->downloadToFile('/tmp/'.$file_name);
 
         return '/tmp/'.$file_name;
     }
-    public function delete_file_from_firebase_storage($file_name = ''){
+    public function delete_file_from_firebase_storage($file_name = '',$folder_name = ''){
         if($file_name === '') return;
 
-        $this->storage->getBucket()->object($file_name)->delete();
+        if($folder_name !== '' && strpos($folder_name,'/') === FALSE)
+            $folder_name .= '/';
 
-        if(file_exists('/tmp/'.$file_name)){
-            unlink('/tmp/'.$file_name);
+        try{
+            $this->storage->getBucket()->object($folder_name.$file_name)->delete();
+        }catch(Exception $e){
+
+        }finally{
+            if(file_exists('/tmp/'.$file_name)){
+                unlink('/tmp/'.$file_name);
+            }
         }
+
     }
 }

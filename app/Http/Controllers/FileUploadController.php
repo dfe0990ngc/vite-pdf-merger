@@ -27,7 +27,7 @@ class FileUploadController extends FirebaseController
                 'size' => $fileSize
             ));
             
-            $this->upload_to_firebase_storage($file);
+            $this->upload_to_firebase_storage($file,'pdfs/');
             $request->session()->put('files',$files);
 
             // Handle other logic (e.g., database updates, etc.) as needed
@@ -54,7 +54,7 @@ class FileUploadController extends FirebaseController
                 return $item['name'] !== $file;
             });
             
-            $this->delete_file_from_firebase_storage($file);
+            $this->delete_file_from_firebase_storage($file,'pdfs/');
             session()->put('files',$files);
 
             return response()->json(array(
@@ -75,12 +75,13 @@ class FileUploadController extends FirebaseController
             $merger = PdfMerger::init();
 
             foreach($files as $k => $v){
-                $file_name = $this->get_file_from_firebase_storage($v['name']);
-                $merger->addPDF($file_name,'all');
+                $file_name = $this->get_file_from_firebase_storage($v['name'],'pdfs/');
+                if($file_name)
+                    $merger->addPDF($file_name,'all');
             }
 
             $merger->merge();
-            $merger->save('merged-files.pdf','');
+            $merger->save('merged-files.pdf','browser');
         }
 
         return response()->json(array(
