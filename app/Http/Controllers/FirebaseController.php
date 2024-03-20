@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use Google\Cloud\Storage\StorageObject;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 
 class FirebaseController extends Controller
@@ -92,11 +93,18 @@ class FirebaseController extends Controller
         $file_name = $file->getClientOriginalName();
         $file->move('/tmp',$file_name);
 
-        $this->storage->getBucket()->upload(fopen('/tmp/'.$file_name,'r'),['name' => $folder_name.$file_name]);
+        // $this->storage->getBucket()->upload(fopen('/tmp/'.$file_name,'r'),['name' => $folder_name.$file_name]);
 
-        if(file_exists('/tmp/'.$file_name)){
-            unlink('/tmp/'.$file_name);
-        }
+        $promise = $this->storage->getBucket()->uploadAsync(fopen('/tmp/'.$file_name,'r'),['name' => $folder_name.$file_name])
+        ->then(function(StorageObject $object) use($file_name){
+            if(file_exists('/tmp/'.$file_name)){
+                unlink('/tmp/'.$file_name);
+            }
+        }, function(Exception $e) use($file_name){
+            throw new Exception('An error has occurred while uploading '.$file_name,0, $e);
+        });
+
+        $promise->wait();
     }
     public function get_files_from_firebase_storage(){
         return $this->storage->getBucket();
