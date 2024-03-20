@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Mail\ThankYouMail;
 use Illuminate\Http\Request;
-use App\Models\PDFMergeSubscriber;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -30,17 +29,17 @@ class PDFMergeSubscriberController extends FirebaseController
     {
 
         $validator = Validator::make($request->all(),[
-            'email' => 'required|email|unique:pdfmergesubscribers,email',
-        ],[
-            'email' => 'Welcome back! It seemed you are already subscribed.'
+            'email' => 'required|email',
         ]);
 
         if(!$validator->fails()){
             $email = $request->input('email');
             $subscriber = $this->is_subscriber_exists($email);
+            $message = 'Awesome! You have subscribed with our news and updates!';
 
             if($subscriber){
                 $this->resubscribe_email($email);
+                $message = 'Welcome back! You are already subscribed to our news letter. Thank you for keeping in-touch with us!';
             }else{
                 $this->add_subscriber_email($email);
             }
@@ -50,7 +49,7 @@ class PDFMergeSubscriberController extends FirebaseController
 
 
             return response()->json(array(
-                'message' => 'Awesome! You have subscribed with our news and updates!'
+                'message' => $message
             ),200);
         }
 

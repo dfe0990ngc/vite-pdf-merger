@@ -20,7 +20,7 @@ jobs:
               run: npm install --global vercel@latest
 
             - name: Install Dependencies
-              run: composer install --ignore-plaform-req=ext-sodium
+              run: composer install
 
             # - name: Migrate DB
             #   run: |
