@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title')</title>
     <meta name="description" content="@yield('description')">
+    <meta name="google-site-verification" content="3Z-cqXXA7FyTRiieIDR70Bn8NFP7CgbGC9WFu58kvCA" />
 
     <link rel="shortcut icon" href="{{ asset('images/img-logo.webp') }}" type="image/png">
 
