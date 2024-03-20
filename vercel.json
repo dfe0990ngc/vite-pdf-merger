@@ -7,6 +7,10 @@
     "outputDirectory": "public",
     "routes": [
         {
+            "src": "/(.html)",
+            "dest": "/public/"
+        },
+        {
             "src": "/build/(.*)",
             "dest": "/public/resources/"
         },
