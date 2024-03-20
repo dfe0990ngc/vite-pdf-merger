@@ -3,8 +3,8 @@
 use App\Http\Controllers\ContactUsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileUploadController;
-use App\Http\Controllers\FirebaseController;
 use App\Http\Controllers\PDFMergeSubscriberController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Artisan;
 
 // =============== PAGE ROUTES ===============
@@ -33,3 +33,5 @@ Route::get('/optimize-me', function(){
     Artisan::call('optimize:clear');
     return 'Migrate Fresh Done!';
 });
+
+Route::get('/sitemap', [SitemapController::class,'siteMap'])->name('site.map');
