@@ -7,7 +7,7 @@
     "outputDirectory": "public",
     "routes": [
         {
-            "src": "/(.html)",
+            "src": "googled13d2a9d2b6d8f12.html",
             "dest": "/public/"
         },
         {
