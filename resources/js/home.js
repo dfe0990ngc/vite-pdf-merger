@@ -61,24 +61,39 @@ document.addEventListener('DOMContentLoaded', (e) => {
     btnMerge.addEventListener('click', () => {
 
         const fromSessionFiles = myDropzone.previewsContainer.querySelectorAll('.dz-preview.dz-image-preview');
+        const fileLength = myDropzone.files.length + fromSessionFiles.length;
 
         animateMergeBtn(true);
-        if(myDropzone.files.length > 1 || fromSessionFiles.length > 1){
-            const mergeLink = document.createElement('a');
+        if(fileLength > 1){
+            fetch('/merge-pdf').then( res => res.blob() ).then( blob => {
 
-            mergeLink.setAttribute('href','/merge-pdf');
-            mergeLink.setAttribute('class','hidden');
-            mergeLink.setAttribute('target','_blank');
-            mergeLink.setAttribute('download','merged-files.pdf');
+                var downloadLink = document.createElement('a');
+                downloadLink.target = '_blank';
 
-            document.body.appendChild(mergeLink);
+                // Create file name prefix using date
+                const fnp = new Date();
+                const fileName = fnp.valueOf()+'-'+fnp.toJSON().slice(0,10);
 
-            mergeLink.click();
-            mergeLink.remove();
+                downloadLink.download = fileName+'-merged-files.pdf';
 
-            setTimeout(() => {
+                // create an object URL from the Blob
+                var URL = window.URL || window.webkitURL;
+                var downloadUrl = URL.createObjectURL(blob);
+
+                // set object URL as the anchor's href
+                downloadLink.href = downloadUrl;
+
+                // append the anchor to document body
+                document.body.append(downloadLink);
+
+                // fire a click event on the anchor
+                downloadLink.click();
+
+                // Remove the anchor
+                downloadLink.remove();
+
                 animateMergeBtn(false);
-            }, 1300);
+            });
         }else{
             animateMergeBtn(false);
             alert('Please upload 2 or more pdf files to be merged');

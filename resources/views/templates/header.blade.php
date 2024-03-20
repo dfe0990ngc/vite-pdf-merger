@@ -18,8 +18,20 @@
 
 <div id="nav-main-overlay" class="hidden sm:hidden absolute bg-black opacity-70 top-0 min-w-full min-h-full z-40 transition-all duration-300"></div>
 <ul id="nav-main-menu" class="hidden z-50 sm:hidden list-none bg-page px-5 py-8 shadow-2xl absolute top-16 right-0 w-60 transition-all duration-500">
-    <li class="mb-5"><a class="hover:opacity-45 font-semibold text-black" href="{{ url('/') }}">Home</a></li>
-    <li class="mb-5"><a class="hover:opacity-45 font-semibold text-black" href="{{ url('/about-us') }}">About</a></li>
-    <li class="mb-5"><a class="hover:opacity-45 font-semibold text-black" href="{{ url('/contact-us') }}">Contact Us</a></li>
-    <li class="mb-5"><a class="hover:opacity-45 font-semibold text-black" href="{{ url('/donate') }}">Donate</a></li>
+    <li class="mb-5">
+        <a class="hover:opacity-45 font-semibold text-black" href="{{ url('/') }}">Home</a>
+        <hr class="border-red-600 h-[1px] mt-4 bg-red-600">
+    </li>
+    <li class="mb-5">
+        <a class="hover:opacity-45 font-semibold text-black" href="{{ url('/about-us') }}">About</a>
+        <hr class="border-red-600 h-[1px] mt-4 bg-red-600">
+    </li>
+    <li class="mb-5">
+        <a class="hover:opacity-45 font-semibold text-black" href="{{ url('/contact-us') }}">Contact Us</a>
+        <hr class="border-red-600 h-[1px] mt-4 bg-red-600">
+    </li>
+    <li class="mb-5">
+        <a class="hover:opacity-45 font-semibold text-black" href="{{ url('/donate') }}">Donate</a>
+        <hr class="border-red-600 h-[1px] mt-4 bg-red-600">
+    </li>
 </ul>
