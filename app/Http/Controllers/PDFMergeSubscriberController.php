@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Trait\BrevoTrait;
+use Illuminate\Support\Facades\Crypt;
 
 class PDFMergeSubscriberController extends FirebaseController
 {
@@ -66,8 +67,29 @@ class PDFMergeSubscriberController extends FirebaseController
     }
 
     public function update(Request $request){
-        $email = $request->input('email');
-        $this->unsubscribe_email($email);
-        return view('unsubscribed');
+
+        if($request->has('id')){
+            $id = $request->input('id');
+            $email = Crypt::decryptString($id);
+            $this->unsubscribe_email($email);
+        }
+
+        return redirect('/',302);
+    }
+
+    public function unsubscribe(Request $request){
+        $id = $request->input('id');
+        $email = Crypt::decryptString($id);
+        $subscriber = $this->is_subscriber_exists($email);
+        
+        $is_subscribed = true;
+
+        if($subscriber){
+            $subscriber = array_column($subscriber,'active');
+
+            $is_subscribed = boolval($subscriber[0]) === TRUE;
+        }
+
+        return view('unsubsribe',array('id' => $id,'is_subscribed' => $is_subscribed));
     }
 }

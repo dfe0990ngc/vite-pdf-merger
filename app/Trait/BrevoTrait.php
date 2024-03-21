@@ -4,6 +4,7 @@ namespace App\Trait;
 
 use Exception;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Crypt;
 use SendinBlue\Client\Configuration;
 use SendinBlue\Client\Model\SendSmtpEmail;
 use SendinBlue\Client\Api\TransactionalEmailsApi;
@@ -23,7 +24,7 @@ trait BrevoTrait
             'name'=> $name
         ));
         $sendSmtpEmail['templateId'] = 2;
-        $sendSmtpEmail['params'] = array('email' => $email);
+        $sendSmtpEmail['params'] = array('id' => Crypt::encryptString($email));
         // $sendSmtpEmail['headers'] = array('X-Mailin-custom'=>'custom_header_1:custom_value_1|custom_header_2:custom_value_2');
 
         try {

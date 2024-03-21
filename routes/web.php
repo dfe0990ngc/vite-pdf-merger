@@ -21,6 +21,8 @@ Route::get('/get-files-from-session',[FileUploadController::class,'getFileFromSe
 Route::get('/remove-file',[FileUploadController::class,'removeFile'])->name('file.remove-file');
 Route::get('/merge-pdf',[FileUploadController::class,'mergePDF'])->name('file.merge-pdf');
 Route::post('/add-subscriber',[PDFMergeSubscriberController::class,'store'])->name('subscriber.add');
+Route::get('/unsubscribe-email',[PDFMergeSubscriberController::class,'unsubscribe'])->name('subscriber.unsubscribe');
+Route::post('/unsubscribe',[PDFMergeSubscriberController::class,'update'])->name('subscriber.update');
 
 Route::post('/contact-us-upload', [ContactUsController::class,'upload'])->name('contact_us.upload');
 Route::get('/contact-us-get-files-from-session',[ContactUsController::class,'getFileFromSession'])->name('contact_us.from-session');
