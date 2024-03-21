@@ -21,14 +21,14 @@ class FileUploadController extends FirebaseController
             $fileName = $file->getClientOriginalName();
 
             $fileSize = filesize($file);
-            $files = $request->session()->get('files') ?? [];
+            $files = session()->get('files') ?? [];
             array_push($files,array(
                 'name' => $fileName,
                 'size' => $fileSize
             ));
             
             $this->upload_to_firebase_storage($file,'pdfs/');
-            $request->session()->put('files',$files);
+            session()->put('files',$files);
 
             // Handle other logic (e.g., database updates, etc.) as needed
             return redirect()->back()->with('success', 'File uploaded successfully.');
@@ -38,7 +38,7 @@ class FileUploadController extends FirebaseController
 
     public function getFileFromSession(Request $request){
 
-        $data = $request->session()->get('files');
+        $data = session()->get('files');
 
         if($data && count($data) === 0)
             $data = array();
@@ -70,7 +70,7 @@ class FileUploadController extends FirebaseController
 
     public function mergePDF(Request $request){
 
-        $files = $request->session()->get('files');
+        $files = session()->get('files');
         if($files && count($files) > 0){
             $merger = PdfMerger::init();
 

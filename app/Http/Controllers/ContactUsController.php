@@ -61,14 +61,14 @@ class ContactUsController extends FirebaseController
             $fileName = $file->getClientOriginalName();
 
             $fileSize = filesize($file);
-            $files = $request->session()->get('attachments') ?? [];
+            $files = session()->get('attachments') ?? [];
             array_push($files,array(
                 'name' => $fileName,
                 'size' => $fileSize
             ));
             
             $this->upload_to_firebase_storage($file,'attachments/');
-            $request->session()->put('attachments',$files);
+            session()->put('attachments',$files);
 
             // Handle other logic (e.g., database updates, etc.) as needed
             return redirect()->back()->with('success', 'File uploaded successfully.');
