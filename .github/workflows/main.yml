@@ -12,9 +12,6 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                 php-version: '8.2'
-
-            - name: Enable PostgreSQL Service
-              run: sudo apt-get install php-pgsql
               
             - name: Install Vercel CLI
               run: npm install --global vercel@latest
@@ -31,3 +28,5 @@ jobs:
                 FIREBASE_PROJECT=${{ secrets.FIREBASE_PROJECT }}
                 FIREBASE_CREDENTIALS=${{ secrets.FIREBASE_CREDENTIALS }}
                 FIREBASE_DATABASE_URL=${{ secrets.FIREBASE_DATABASE_URL }}
+                VERCEL_ORG_ID=${{ secrets.VERCEL_ORG_ID }}
+                VERCEL_PROJECT_ID=${{ secrets.VERCEL_PROJECT_ID }}
