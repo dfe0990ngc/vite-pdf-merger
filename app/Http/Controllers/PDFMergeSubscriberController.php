@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ThankYouMail;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use App\Trait\BrevoTrait;
 
 class PDFMergeSubscriberController extends FirebaseController
 {
+    use BrevoTrait;
+
     public function __construct()
     {
         parent::__construct();
@@ -45,8 +46,9 @@ class PDFMergeSubscriberController extends FirebaseController
                 $this->add_subscriber_email($email);
             }
 
+            // Send Thank you email
             try{
-                Mail::to($email)->bcc('pdfmergerauthor@gmail.com')->send(new ThankYouMail());
+                $this->sendSMTP($email);
             }catch(Exception $e){
                 return response()->json([
                     'error' => $e->getMessage()
