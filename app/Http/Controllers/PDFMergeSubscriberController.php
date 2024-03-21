@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\ThankYouMail;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -44,8 +45,13 @@ class PDFMergeSubscriberController extends FirebaseController
                 $this->add_subscriber_email($email);
             }
 
-            $thankyouMail = new ThankYouMail();
-            Mail::to($email)->bcc('pdfmergerauthor@gmail.com')->send($thankyouMail);
+            try{
+                Mail::to($email)->bcc('pdfmergerauthor@gmail.com')->send(new ThankYouMail());
+            }catch(Exception $e){
+                return response()->json([
+                    'error' => $e->getMessage()
+                ]);
+            }
 
 
             return response()->json(array(
