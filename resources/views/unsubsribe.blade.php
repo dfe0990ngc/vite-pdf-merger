@@ -4,7 +4,7 @@
 @section('description', 'Free PDF Merger or Join multiple PDF files into single a file.')
 
 @section('content')
-    <div class="flex flex-col justify-start w-full items-center my-5 py-5 px-14">
+    <div class="flex flex-col justify-start w-full items-center my-5 py-5">
         @if ($is_subscribed !== FALSE)
             <h1 class="text-5xl text-[#9F0000] font-bold mt-3 mb-5 text-center w-full">
                 Unsubscribe Confirmation
