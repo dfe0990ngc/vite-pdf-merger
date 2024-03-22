@@ -16,6 +16,17 @@
             of PDF Merger. Your generosity helps us continue improving our tool and providing valuable
             features to our users.
         </p>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6648935279137944"
+            crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block; text-align:center;"
+            data-ad-layout="in-article"
+            data-ad-format="fluid"
+            data-ad-client="ca-pub-6648935279137944"
+            data-ad-slot="7875664514"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
 
         <h2 class="text-4xl text-[#9F0000] mt-6 mb-4 w-full text-left font-bold">Donation Options:</h2>
         <div class="flex flex-col justify-start items-center gap-8 sm:flex-row w-full sm:justify-center sm:items-center">
