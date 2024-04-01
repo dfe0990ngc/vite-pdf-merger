@@ -15,7 +15,9 @@ trait BrevoTrait
 
         if($email === '') return;
 
-        $config = Configuration::getDefaultConfiguration()->setApiKey('api-key','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');
+        $apiKey = env('BREVO_API_KEY','');
+
+        $config = Configuration::getDefaultConfiguration()->setApiKey('api-key',$apiKey);
         $BrevoInstance = new TransactionalEmailsApi(new Client(),$config);  
 
         $sendSmtpEmail = new SendSmtpEmail();
