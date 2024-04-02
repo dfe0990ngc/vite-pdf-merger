@@ -71,17 +71,6 @@
             Thank you for choosing PDF Merge Free. We appreciate your feedback and look forward to
             serving you better.
         </p>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6648935279137944"
-            crossorigin="anonymous"></script>
-        <ins class="adsbygoogle"
-            style="display:block; text-align:center;"
-            data-ad-layout="in-article"
-            data-ad-format="fluid"
-            data-ad-client="ca-pub-6648935279137944"
-            data-ad-slot="7875664514"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
 
         <p class="mt-6 text-xl text-black text-left w-full">
             For any inquiries, please contact us at
