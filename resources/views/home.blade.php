@@ -5,7 +5,7 @@
 
 @section('content')
 
-    @vite(['resources/css/dropzone.css','resources/js/home.js'])
+    @vite(['resources/css/dropzone.css','resources/js/home.js','resources/js/contact_us.js'])
 
     <div class="flex flex-col-reverse justify-center w-full items-center sm:flex-row sm:justify-between sm:items-center my-5">
         <div class="flex flex-col gap-3 w-full sm:w-auto pr-2">
@@ -161,7 +161,6 @@
         </p>
     </div>
     <hr class="border-red-950 w-full my-5">
-    @vite(['resources/css/dropzone.css','resources/js/contact_us.js'])
     <div class="flex flex-col justify-start w-full items-center my-5">
         <h1 class="text-5xl text-[#9F0000] font-bold mt-3 mb-5 text-left w-full">
             Contact Us
